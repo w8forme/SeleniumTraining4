@@ -11,12 +11,12 @@
 
     <!--Prepare test for firefox and IE browsers-->
 
-    <!--<test name="Create New Product [Firefox]">-->
-        <!--<parameter name="browser" value="firefox"/>-->
-        <!--<classes>-->
-            <!--<class name="myprojects.automation.assignment4.tests.CreateProductTest"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Create New Product [Firefox]">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="myprojects.automation.assignment4.tests.CreateProductTest"/>
+        </classes>
+    </test>
 
     <test name="Create New Product [Internet explorer]">
         <parameter name="browser" value="ie"/>
