@@ -4,7 +4,6 @@ import myprojects.automation.assignment4.BaseTest;
 import myprojects.automation.assignment4.model.ProductDAO;
 import myprojects.automation.assignment4.model.ProductData;
 import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

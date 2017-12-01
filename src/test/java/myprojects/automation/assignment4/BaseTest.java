@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.*;
 
@@ -37,7 +38,12 @@ public abstract class BaseTest {
                 System.setProperty(
                         "webdriver.ie.driver",
                         getResource("/IEDriverServer.exe"));
-                return new InternetExplorerDriver();
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
+                capabilities.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR, true);
+                capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
+                capabilities.setCapability(InternetExplorerDriver.NATIVE_EVENTS, false);
+                return new InternetExplorerDriver(capabilities);
             case "chrome":
             default:
                 System.setProperty(

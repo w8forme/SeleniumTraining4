@@ -63,21 +63,20 @@ public class GeneralActions {
     }
 
     public ProductDAO getTestProduct(ProductData newProduct) {
+        CustomReporter.logAction("Open main page");
         mainPage = PageFactory.initElements(driver, MainPage.class);
+        CustomReporter.logAction("Click on all products link");
         allProductsPage = mainPage.openMainPage()
                 .scrollToAllProductsLink()
                 .clickAllProductsLink();
+        CustomReporter.logAction("Check if test product present in catalog");
         boolean hasTestProduct = allProductsPage.isProductPresent(newProduct.getName());
         productDetailsPage = allProductsPage.clickOnProduct();
+        CustomReporter.logAction("Extract product details to further compare");
         productDAO = productDetailsPage.getProductDetails();
         productDAO.setDisplayed(hasTestProduct);
         return productDAO;
     }
-
-//    public boolean isTestProductPresent() {
-//
-//
-//    }
 
     /**
      * Waits until page loader disappears from the page
