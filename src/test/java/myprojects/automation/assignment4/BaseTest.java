@@ -76,7 +76,7 @@ public abstract class BaseTest {
 
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-//        driver.manage().window().maximize();
+        driver.manage().window().maximize();
 
         actions = new GeneralActions(driver);
     }

@@ -1,10 +1,9 @@
 package myprojects.automation.assignment4;
 
 
+import myprojects.automation.assignment4.model.ProductDAO;
 import myprojects.automation.assignment4.model.ProductData;
-import myprojects.automation.assignment4.pages.CreateNewProductPage;
-import myprojects.automation.assignment4.pages.DashboardPage;
-import myprojects.automation.assignment4.pages.LoginPage;
+import myprojects.automation.assignment4.pages.*;
 import myprojects.automation.assignment4.utils.logging.CustomReporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,11 +15,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Contains main script actions that may be used in scripts.
  */
 public class GeneralActions {
+
     private WebDriver driver;
     private WebDriverWait wait;
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
     private CreateNewProductPage createNewProductPage;
+    private MainPage mainPage;
+    private AllProductsPage allProductsPage;
+    private ProductDetailsPage productDetailsPage;
+    private ProductDAO productDAO;
 
 
     public GeneralActions(WebDriver driver) {
@@ -50,13 +54,30 @@ public class GeneralActions {
         createNewProductPage = dashboardPage.selectCatalogProducts().clickCreateNewProductButton();
         CustomReporter.logAction("Create new product with random parameters");
         createNewProductPage.fillProductName(newProduct.getName())
-                .fillProductQuantity(newProduct.getPrice())
+                .fillProductQuantity(newProduct.getQty())
                 .fillProductPrice(newProduct.getPrice())
                 .clickSwitchButton()
                 .closeMessageWindow()
                 .clickSaveButton()
                 .closeMessageWindow();
     }
+
+    public ProductDAO getTestProduct(ProductData newProduct) {
+        mainPage = PageFactory.initElements(driver, MainPage.class);
+        allProductsPage = mainPage.openMainPage()
+                .scrollToAllProductsLink()
+                .clickAllProductsLink();
+        boolean hasTestProduct = allProductsPage.isProductPresent(newProduct.getName());
+        productDetailsPage = allProductsPage.clickOnProduct();
+        productDAO = productDetailsPage.getProductDetails();
+        productDAO.setDisplayed(hasTestProduct);
+        return productDAO;
+    }
+
+//    public boolean isTestProductPresent() {
+//
+//
+//    }
 
     /**
      * Waits until page loader disappears from the page

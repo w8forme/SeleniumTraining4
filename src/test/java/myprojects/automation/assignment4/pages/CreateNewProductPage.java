@@ -29,7 +29,7 @@ public class CreateNewProductPage {
     @FindBy(className = "growl-close")
     private WebElement closeIcon;
 
-    @FindBy(xpath = "//*[@class = 'btn btn-primary js-btn-save']")
+    @FindBy(css = "input#submit.btn.btn-primary.save.uppercase")
     private WebElement saveButton;
 
     public CreateNewProductPage(WebDriver driver) {
@@ -42,8 +42,8 @@ public class CreateNewProductPage {
         return this;
     }
 
-    public CreateNewProductPage fillProductQuantity(String productQuantity) {
-        productQuantityField.sendKeys(productQuantity);
+    public CreateNewProductPage fillProductQuantity(Integer productQuantity) {
+        productQuantityField.sendKeys(productQuantity.toString());
         return this;
     }
 
